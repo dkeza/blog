@@ -1,4 +1,4 @@
-cd themes/galdebert-hyde
+cd themes/dkeza-hyde
 git add -A
 git commit -m "new template sources"
 git push
@@ -8,8 +8,8 @@ git add -A
 git commit -m "new blog sources"
 git push
 
-hugo --cleanDestinationDir -d ../galdebert.github.io
-cd ../galdebert.github.io
+hugo --cleanDestinationDir -d ../dkeza.github.io
+cd ../dkeza.github.io
 git add -A
 git commit -m "new generated pages"
 git push
