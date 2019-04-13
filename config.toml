@@ -1,4 +1,11 @@
 baseURL = "https://www.kezic.net/"
 languageCode = "en-us"
-title = "My New Hugo Site"
+title = "Darko Kezic's Blog"
 theme = "dkeza-hyde"
+
+[params]
+description = "Software engineer, coder, entrepreneur, passionate about new technologies in IT industry"
+themeColor = "theme-base-0c"
+copyright = "Darko Kezic. All rights reserved."
+github = "https://github.com/dkeza"
+use_icons = true
