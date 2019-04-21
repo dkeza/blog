@@ -3,6 +3,7 @@ languageCode = "en-us"
 title = "Darko Kezic's Blog"
 theme = "dkeza-hyde"
 googleAnalytics = "UA-138734051-1"
+disqusShortname = "darko-kezic-blog"
 
 [params]
 description = "Software engineer, coder, entrepreneur, passionate about new technologies in IT industry"
