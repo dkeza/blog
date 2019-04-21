@@ -31,7 +31,7 @@ go get -v gopkg.in/mail.v2
 # Example how to use it
 
 Here is basic example, how we can use Gomail
-```golang
+{{< highlight go >}}
 package main
 
 import (
@@ -93,7 +93,7 @@ func main() {
 
     return
 }
-```
+{{< /highlight >}}
 
 `panic` command is here used because this is simple example, but in production is better to return err to caller.
 
