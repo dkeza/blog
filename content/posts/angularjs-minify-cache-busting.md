@@ -291,4 +291,4 @@ and in release.js you can see that place holder ___REPLACE_IN_GULP___ is also up
 
 # Conclusion
 
-Using Gulp i can create release version of my AngularJS web site, where all js and css files are minified and combined into single files, and where Cache bust is included, to force web browser to load new version.
+Using Gulp I can create release version of my AngularJS web site, where all js and css files are minified and combined into single files, and where Cache bust is included, to force web browser to load new version.
