@@ -244,7 +244,7 @@ and see log of executed commands
 [09:16:04] Finished 'default' after 5.05 s
 {{< /highlight >}}
 
-Tak a look into generated source in public folder. You will see in index.html, that we have only one js and css file, with time stamp added as query parameter
+Take a look into generated source in public folder. You will see in index.html, that we have only one js and css file, with time stamp added as query parameter
 
 {{< highlight html >}}
 <!DOCTYPE html>
