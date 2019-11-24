@@ -26,6 +26,17 @@ In goexpenses.ini file is possible also to set other parameters, like mail serve
     </item>
     
     <item>
+      <title>Raspberry Pi SD card image backup issue</title>
+      <link>http://kezic.local/posts/raspberry_pi_sd_card_image_issue/</link>
+      <pubDate>Sun, 24 Nov 2019 19:31:19 +0200</pubDate>
+      
+      <guid>http://kezic.local/posts/raspberry_pi_sd_card_image_issue/</guid>
+      <description>&lt;p&gt;For my Raspberry Pi I have many times done backup from SD card to image file.&lt;br /&gt;
+But first time when I wanted to actually restore my saved image backup from file on disk to SC card for Raspberry Pi, I expirienced unpleasent suprise:&lt;br /&gt;
+I couldn&amp;rsquo;t restore my backup.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>Contact me</title>
       <link>http://kezic.local/contactme/</link>
       <pubDate>Sun, 24 Nov 2019 12:29:23 +0100</pubDate>

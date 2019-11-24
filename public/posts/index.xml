@@ -6,10 +6,21 @@
     <description>Recent content in Posts on Darko Kezic&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 30 Apr 2019 23:05:44 +0200</lastBuildDate>
+    <lastBuildDate>Sun, 24 Nov 2019 19:31:19 +0200</lastBuildDate>
     
 	<atom:link href="http://kezic.local/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Raspberry Pi SD card image backup issue</title>
+      <link>http://kezic.local/posts/raspberry_pi_sd_card_image_issue/</link>
+      <pubDate>Sun, 24 Nov 2019 19:31:19 +0200</pubDate>
+      
+      <guid>http://kezic.local/posts/raspberry_pi_sd_card_image_issue/</guid>
+      <description>&lt;p&gt;For my Raspberry Pi I have many times done backup from SD card to image file.&lt;br /&gt;
+But first time when I wanted to actually restore my saved image backup from file on disk to SC card for Raspberry Pi, I expirienced unpleasent suprise:&lt;br /&gt;
+I couldn&amp;rsquo;t restore my backup.&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>AngularJS - Minify resources and Cache Busting</title>
