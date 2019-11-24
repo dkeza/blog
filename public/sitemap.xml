@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>http://kezic.local/contactme/</loc>
+    <lastmod>2019-11-24T12:29:23+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://kezic.local/</loc>
+    <lastmod>2019-11-24T12:29:23+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://kezic.local/about/</loc>
+    <lastmod>2019-11-23T19:47:23+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://kezic.local/posts/angularjs-minify-cache-busting/</loc>
+    <lastmod>2019-04-30T23:05:44+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://kezic.local/posts/</loc>
+    <lastmod>2019-04-30T23:05:44+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://kezic.local/posts/send-email-from-go/</loc>
+    <lastmod>2019-04-21T10:21:19+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://kezic.local/categories/</loc>
+  </url>
+  
+  <url>
+    <loc>http://kezic.local/tags/</loc>
+  </url>
+  
+</urlset>

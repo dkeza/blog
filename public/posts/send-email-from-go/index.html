@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-us" lang="en-us">
+<head>
+  <link href="//gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <meta name="generator" content="Hugo 0.59.1" />
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>How to send E-Mail from Go &middot; Darko Kezic&#39;s Blog</title>
+
+  
+  <link type="text/css" rel="stylesheet" href="http://kezic.local/css/print.css" media="print">
+  <link type="text/css" rel="stylesheet" href="http://kezic.local/css/poole.css">
+  <link type="text/css" rel="stylesheet" href="http://kezic.local/css/syntax.css">
+  <link type="text/css" rel="stylesheet" href="http://kezic.local/css/hyde.css">
+  
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface|PT+Sans:400,400i,700">
+
+
+  
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+  
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/favicon.png">
+
+  
+  <link href="" rel="alternate" type="application/rss+xml" title="Darko Kezic&#39;s Blog" />
+
+  
+</head>
+
+  <body class="theme-base-0c ">
+  <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <a href="http://kezic.local/"><h1>Darko Kezic&#39;s Blog</h1></a>
+      
+        <p class="lead">Software engineer, coder, entrepreneur, passionate about new technologies in IT industry</p>
+      
+    </div>
+    <a class="sidebar-nav" href="http://kezic.local/">Home</a><br/>
+    <a class="sidebar-nav" href="http://kezic.local/posts">Posts</a><br/>
+    <ul class="sidebar-nav-item">
+        
+    </ul>
+
+    <ul class="sidebar-nav">
+      <li>
+        <a href="http://kezic.local/about">About me</a>
+      </li>
+      <li>
+        <a href="https://github.com/dkeza">Github</a>
+        
+          <a href="https://github.com/dkeza"><i class="fa fa-github-square"></i></a>
+        
+      </li>
+      <li>
+        <a href="https://www.linkedin.com/in/darkokezic">LinkedIn</a>
+        
+          <a href="https://www.linkedin.com/in/darkokezic"><i class="fa fa-linkedin-square"></i></a>
+        
+      </li>
+      <li>
+        <a href="http://kezic.local/contactme">Contact me</a>
+      </li>
+      <div class="sidebar-nav-item">
+        
+      </div>
+    </ul>
+
+    <div class="sidebar-footer">
+      <p>Powered by <a href="http://gohugo.io/">Hugo</a> - 
+      &copy; 2019 Darko Kezic. All rights reserved.</p>
+    </div>
+  </div>
+</div>
+    <main class="content container">
+    <div class="post">
+    <h1>How to send E-Mail from Go</h1>
+    
+    <p>I wanted to create small service in Go, which should asynchronously send E-Mails created on web site.</p>
+
+<p>Web site is actually a reservation web page for hotel, where guests can directly book reservations, without going to some channel provider web site, like booking.com, hotels.com etc.</p>
+
+<p>At the end, when reservation is confirmed, user receives E-Mail with conformation. Currently E-Mail is send directly from server, in same thread, and guest must wait until E-Mail is received by SMTP server.</p>
+
+<p>I know this is not a good practice, and I wanted to change this. Lastly I am using Go for such cases, mostly because of single binary which ca be easily be installed as service on client site. For this, I also use <a href="https://nssm.cc/">nssm.exe</a> which allows any executable to be started as Windows service.</p>
+
+<h1 id="code-it-all-self-in-go-or-use-third-party-library">Code it all self in Go, or use third party library?</h1>
+
+<p>Every choice has it benefits. At first, I tried to send E-Mail using code examples from standard library. I had some success, but there are some issues when sending E-Mail over Gmail SMTP server on port 465. As it turns out, on port 567 is used <em>Submission for Simple Mail Transfer</em> (submission) and on port 465 is used <em>smtp protocol over TLS</em> (smtps).</p>
+
+<p>OK, it is not so simple, so I checked is there some third party solution for this on Github.</p>
+
+<p>I found on Github <a href="https://github.com/go-mail/mail">Gomail</a> project. This is fork of original Gomail project, and it is actively maintained.</p>
+
+<h1 id="how-to-install-gomail">How to install Gomail</h1>
+
+<p>As usual, use go get command:</p>
+
+<pre><code class="language-golang">go get -v gopkg.in/mail.v2
+</code></pre>
+
+<h1 id="example-how-to-use-it">Example how to use it</h1>
+
+<p>Here is basic example, how we can use Gomail
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+
+<span style="color:#f92672">import</span> (
+	<span style="color:#e6db74">&#34;bytes&#34;</span>
+	<span style="color:#e6db74">&#34;crypto/tls&#34;</span>
+	<span style="color:#e6db74">&#34;io/ioutil&#34;</span>
+
+	<span style="color:#a6e22e">gomail</span> <span style="color:#e6db74">&#34;gopkg.in/mail.v2&#34;</span>
+)
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+    <span style="color:#a6e22e">m</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">gomail</span>.<span style="color:#a6e22e">NewMessage</span>()
+    
+    <span style="color:#75715e">// Set E-Mail sender
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">m</span>.<span style="color:#a6e22e">SetHeader</span>(<span style="color:#e6db74">&#34;From&#34;</span>, <span style="color:#e6db74">&#34;mymail@example.com&#34;</span>)
+    
+    <span style="color:#75715e">// Set E-Mail receivers
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">m</span>.<span style="color:#a6e22e">SetHeader</span>(<span style="color:#e6db74">&#34;To&#34;</span>, <span style="color:#e6db74">&#34;someguy@example.com&#34;</span>)
+    <span style="color:#a6e22e">m</span>.<span style="color:#a6e22e">SetHeader</span>(<span style="color:#e6db74">&#34;Cc&#34;</span>, <span style="color:#e6db74">&#34;anotherguy@example.com&#34;</span>)
+    <span style="color:#a6e22e">m</span>.<span style="color:#a6e22e">SetHeader</span>(<span style="color:#e6db74">&#34;Bcc&#34;</span>, <span style="color:#e6db74">&#34;office@example.com&#34;</span>, <span style="color:#e6db74">&#34;anotheroffice@example.com&#34;</span>)
+    
+    <span style="color:#75715e">// Set E-Mail subject
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">m</span>.<span style="color:#a6e22e">SetHeader</span>(<span style="color:#e6db74">&#34;Subject&#34;</span>, <span style="color:#e6db74">&#34;Test E-Mail 2&#34;</span>)
+    
+    <span style="color:#75715e">// Set E-Mail body. You can set plain text or html with text/html
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">m</span>.<span style="color:#a6e22e">SetBody</span>(<span style="color:#e6db74">&#34;text/plain&#34;</span>, <span style="color:#e6db74">&#34;Test E-Mail Body&#34;</span>)
+    
+    <span style="color:#75715e">// Attach some file
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">m</span>.<span style="color:#a6e22e">Attach</span>(<span style="color:#e6db74">&#34;myfile1.pdf&#34;</span>)
+
+    <span style="color:#75715e">// Settings for SMTP server
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">d</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">gomail</span>.<span style="color:#a6e22e">NewDialer</span>(<span style="color:#e6db74">&#34;mail.example.com&#34;</span>, <span style="color:#ae81ff">465</span>, <span style="color:#e6db74">&#34;mymail@example.com&#34;</span>, <span style="color:#e6db74">&#34;secret&#34;</span>)
+    
+    <span style="color:#75715e">// This is only needed when SSL/TLS certificate is not valid on server.
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// In production this should be set to false.
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">d</span>.<span style="color:#a6e22e">TLSConfig</span> = <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">tls</span>.<span style="color:#a6e22e">Config</span>{<span style="color:#a6e22e">InsecureSkipVerify</span>: <span style="color:#66d9ef">true</span>}
+
+    <span style="color:#75715e">// Save E-Mail in mymail.txt file
+</span><span style="color:#75715e"></span>
+    <span style="color:#75715e">// Get directory where binary is started
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">dir</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">filepath</span>.<span style="color:#a6e22e">Abs</span>(<span style="color:#a6e22e">filepath</span>.<span style="color:#a6e22e">Dir</span>(<span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Args</span>[<span style="color:#ae81ff">0</span>]))
+    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+            panic(<span style="color:#a6e22e">err</span>)
+    }
+
+    <span style="color:#75715e">// Write contents of E-Mail into mymail.txt.
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// This is useful for debuging.
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">b</span> <span style="color:#a6e22e">bytes</span>.<span style="color:#a6e22e">Buffer</span>
+    <span style="color:#a6e22e">m</span>.<span style="color:#a6e22e">WriteTo</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">b</span>)
+    <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">ioutil</span>.<span style="color:#a6e22e">WriteFile</span>(<span style="color:#a6e22e">dir</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">`mymail.txt`</span>, <span style="color:#a6e22e">b</span>.<span style="color:#a6e22e">Bytes</span>(), <span style="color:#ae81ff">0777</span>)
+    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+        panic(<span style="color:#a6e22e">err</span>)
+    }
+
+    <span style="color:#75715e">// Now send E-Mail
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">d</span>.<span style="color:#a6e22e">DialAndSend</span>(<span style="color:#a6e22e">m</span>); <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+        panic(<span style="color:#a6e22e">err</span>)
+    }
+
+    <span style="color:#66d9ef">return</span>
+}</code></pre></div></p>
+
+<p><code>panic</code> command is here used because this is simple example, but in production is better to return err to caller.</p>
+
+<h1 id="bottom-line">Bottom line</h1>
+
+<p>Until now Gomail is working without issues. I can only recommend it.
+So, give it a try!</p>
+  </div>
+
+  
+
+  
+    </main>
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-138734051-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+    
+  </body>
+</html>

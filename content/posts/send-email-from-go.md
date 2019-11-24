@@ -2,6 +2,7 @@
 title: "How to send E-Mail from Go"
 date: 2019-04-21T10:21:19+02:00
 draft: false
+staticpage: "no"
 ---
 I wanted to create small service in Go, which should asynchronously send E-Mails created on web site.
 

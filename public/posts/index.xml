@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on Darko Kezic&#39;s Blog</title>
+    <link>http://kezic.local/posts/</link>
+    <description>Recent content in Posts on Darko Kezic&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 30 Apr 2019 23:05:44 +0200</lastBuildDate>
+    
+	<atom:link href="http://kezic.local/posts/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>AngularJS - Minify resources and Cache Busting</title>
+      <link>http://kezic.local/posts/angularjs-minify-cache-busting/</link>
+      <pubDate>Tue, 30 Apr 2019 23:05:44 +0200</pubDate>
+      
+      <guid>http://kezic.local/posts/angularjs-minify-cache-busting/</guid>
+      <description>Single page aplication When dealing with Single page application (SPA), it is nessesary to think about minifying those js and css files, and combining those in single files, to speed up loading of app.
+Also there is another issue with caching. When You release new version, browser won&amp;rsquo;t load new files, until You go into developer tools, and disable caching. But this is not a solution for production app.</description>
+    </item>
+    
+    <item>
+      <title>How to send E-Mail from Go</title>
+      <link>http://kezic.local/posts/send-email-from-go/</link>
+      <pubDate>Sun, 21 Apr 2019 10:21:19 +0200</pubDate>
+      
+      <guid>http://kezic.local/posts/send-email-from-go/</guid>
+      <description>&lt;p&gt;I wanted to create small service in Go, which should asynchronously send E-Mails created on web site.&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

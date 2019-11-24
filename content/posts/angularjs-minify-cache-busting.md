@@ -2,6 +2,7 @@
 title: "AngularJS - Minify resources and Cache Busting"
 date: 2019-04-30T23:05:44+02:00
 draft: false
+staticpage: "no"
 ---
 
 # Single page aplication

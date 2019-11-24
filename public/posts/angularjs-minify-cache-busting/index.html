@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-us" lang="en-us">
+<head>
+  <link href="//gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <meta name="generator" content="Hugo 0.59.1" />
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>AngularJS - Minify resources and Cache Busting &middot; Darko Kezic&#39;s Blog</title>
+
+  
+  <link type="text/css" rel="stylesheet" href="http://kezic.local/css/print.css" media="print">
+  <link type="text/css" rel="stylesheet" href="http://kezic.local/css/poole.css">
+  <link type="text/css" rel="stylesheet" href="http://kezic.local/css/syntax.css">
+  <link type="text/css" rel="stylesheet" href="http://kezic.local/css/hyde.css">
+  
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface|PT+Sans:400,400i,700">
+
+
+  
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+  
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/favicon.png">
+
+  
+  <link href="" rel="alternate" type="application/rss+xml" title="Darko Kezic&#39;s Blog" />
+
+  
+</head>
+
+  <body class="theme-base-0c ">
+  <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <a href="http://kezic.local/"><h1>Darko Kezic&#39;s Blog</h1></a>
+      
+        <p class="lead">Software engineer, coder, entrepreneur, passionate about new technologies in IT industry</p>
+      
+    </div>
+    <a class="sidebar-nav" href="http://kezic.local/">Home</a><br/>
+    <a class="sidebar-nav" href="http://kezic.local/posts">Posts</a><br/>
+    <ul class="sidebar-nav-item">
+        
+    </ul>
+
+    <ul class="sidebar-nav">
+      <li>
+        <a href="http://kezic.local/about">About me</a>
+      </li>
+      <li>
+        <a href="https://github.com/dkeza">Github</a>
+        
+          <a href="https://github.com/dkeza"><i class="fa fa-github-square"></i></a>
+        
+      </li>
+      <li>
+        <a href="https://www.linkedin.com/in/darkokezic">LinkedIn</a>
+        
+          <a href="https://www.linkedin.com/in/darkokezic"><i class="fa fa-linkedin-square"></i></a>
+        
+      </li>
+      <li>
+        <a href="http://kezic.local/contactme">Contact me</a>
+      </li>
+      <div class="sidebar-nav-item">
+        
+      </div>
+    </ul>
+
+    <div class="sidebar-footer">
+      <p>Powered by <a href="http://gohugo.io/">Hugo</a> - 
+      &copy; 2019 Darko Kezic. All rights reserved.</p>
+    </div>
+  </div>
+</div>
+    <main class="content container">
+    <div class="post">
+    <h1>AngularJS - Minify resources and Cache Busting</h1>
+    
+    
+
+<h1 id="single-page-aplication">Single page aplication</h1>
+
+<p>When dealing with Single page application (SPA), it is nessesary to think about minifying those js and css files, and combining those in single files, to speed up loading of app.</p>
+
+<p>Also there is another issue with caching. When You release new version, browser won&rsquo;t load new files, until You go into developer tools, and disable caching. But this is not a solution for production app.</p>
+
+<p>Here comes in play &ldquo;Cache Busting&rdquo;.</p>
+
+<h1 id="example-project">Example project</h1>
+
+<p>I created example AngularJS project, where is used <a href="https://gulpjs.com/">Gulp</a> to minify and do Cache Busting for release version of site in public folder</p>
+
+<p><a href="https://github.com/dkeza/angularjs-templates-example">AngularJS - Minify resources and Cache Busting example</a></p>
+
+<p>Project has three partials as html files in templates directory. In app.js file is created angular app and controllers, which are using those partials.
+In css directory are css files, and in js directory are Javascript files.</p>
+
+<p>You can folow steps how I created this project.</p>
+
+<ul>
+<li>AngularJS project, without minifying files <a href="https://github.com/dkeza/angularjs-templates-example/tree/81a514d2b3ccff852d5c5b367b2c832ab0ae6b91">81a514d2b3ccff852d5c5b367b2c832ab0ae6b91</a></li>
+<li>Added code to minify files and copy release files to public directory. Web site root is now in public directory. <a href="https://github.com/dkeza/angularjs-templates-example/tree/e054a1e2789aa786d169640981555c69bfaedbe4">e054a1e2789aa786d169640981555c69bfaedbe4</a></li>
+<li>Added code to also add Cache Bursting <a href="https://github.com/dkeza/angularjs-templates-example/tree/fef9f5b46340e67517a616c616e1c7ff3dab02d0">fef9f5b46340e67517a616c616e1c7ff3dab02d0</a></li>
+</ul>
+
+<h1 id="install-dependencies">Install dependencies</h1>
+
+<p>For minifying and Cache Busting I will use <a href="https://gulpjs.com/">Gulp</a> tool.</p>
+
+<p>I will assume you have already installed <a href="https://nodejs.org/en/">Node</a> with npm on your machine.</p>
+
+<h1 id="install-gulp">Install Gulp</h1>
+
+<p>Installing Gulp CLI</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">npm install --global gulp-cli</code></pre></div>
+
+<p>Now CD into your AngularJS project root, and initialize Node dependency file with</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">npm init</code></pre></div>
+
+<p>Answer all questions with defaults.
+Now you have created package.json file, where npm stores reference which dependency are used in your project.</p>
+
+<p>Install Gulp modules needed</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">npm install --save-dev gulp gulp-if gulp-useref gulp-uglify gulp-clean-css del gulp-cache-bust gulp-string-replace</code></pre></div>
+
+<p>Create file gulpfile.js and paste this code:</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">gulp</span>  <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;gulp&#39;</span>);
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">gulpif</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;gulp-if&#39;</span>);
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">useref</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;gulp-useref&#39;</span>);
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">uglify</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;gulp-uglify&#39;</span>);
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">minifyCss</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;gulp-clean-css&#39;</span>);
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">del</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;del&#39;</span>);
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">cachebust</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;gulp-cache-bust&#39;</span>);
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">replace</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;gulp-string-replace&#39;</span>);
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">versionTimeStamp</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span> <span style="color:#f92672">+</span> Date.<span style="color:#a6e22e">now</span>();
+
+<span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">task</span>(<span style="color:#e6db74">&#39;delete_all&#39;</span>, <span style="color:#66d9ef">function</span>() {
+  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">del</span>([
+    <span style="color:#e6db74">&#39;public/*.*&#39;</span>,
+    <span style="color:#e6db74">&#39;public/css/*.*&#39;</span>,
+    <span style="color:#e6db74">&#39;public/images/*.*&#39;</span>,
+    <span style="color:#e6db74">&#39;public/js/*.*&#39;</span>,
+    <span style="color:#e6db74">&#39;public/templates/*.*&#39;</span>
+  ]);
+});
+
+<span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">task</span>(<span style="color:#e6db74">&#39;minify&#39;</span>, <span style="color:#66d9ef">function</span>(){
+  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">src</span>(<span style="color:#e6db74">&#39;index.html&#39;</span>)
+          .<span style="color:#a6e22e">pipe</span>(<span style="color:#a6e22e">useref</span>())
+          .<span style="color:#a6e22e">pipe</span>(<span style="color:#a6e22e">replace</span>(<span style="color:#e6db74">&#39;___REPLACE_IN_GULP___&#39;</span>, <span style="color:#a6e22e">versionTimeStamp</span>))
+          .<span style="color:#a6e22e">pipe</span>(<span style="color:#a6e22e">gulpif</span>(<span style="color:#e6db74">&#39;*.js&#39;</span>, <span style="color:#a6e22e">uglify</span>()))
+          .<span style="color:#a6e22e">pipe</span>(<span style="color:#a6e22e">gulpif</span>(<span style="color:#e6db74">&#39;*.css&#39;</span>, <span style="color:#a6e22e">minifyCss</span>()))
+          .<span style="color:#a6e22e">pipe</span>(<span style="color:#a6e22e">cachebust</span>({
+            <span style="color:#a6e22e">type</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;timestamp&#39;</span>
+          }))
+          .<span style="color:#a6e22e">pipe</span>(<span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">dest</span>(<span style="color:#e6db74">&#39;public&#39;</span>));
+});
+
+<span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">task</span>(<span style="color:#e6db74">&#39;copy1&#39;</span>, <span style="color:#66d9ef">function</span> () {
+    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">src</span>(<span style="color:#e6db74">&#39;templates/*.*&#39;</span>)
+        .<span style="color:#a6e22e">pipe</span>(<span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">dest</span>(<span style="color:#e6db74">&#39;public/templates&#39;</span>));
+});
+
+<span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">task</span>(<span style="color:#e6db74">&#39;copy2&#39;</span>, <span style="color:#66d9ef">function</span> () {
+  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">src</span>(<span style="color:#e6db74">&#39;images/*.*&#39;</span>)
+      .<span style="color:#a6e22e">pipe</span>(<span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">dest</span>(<span style="color:#e6db74">&#39;public/images&#39;</span>));
+});
+
+<span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">task</span>(<span style="color:#e6db74">&#39;default&#39;</span>, <span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">series</span>(<span style="color:#e6db74">&#39;delete_all&#39;</span>, <span style="color:#e6db74">&#39;minify&#39;</span>, <span style="color:#e6db74">&#39;copy1&#39;</span>, <span style="color:#e6db74">&#39;copy2&#39;</span>));
+</code></pre></div>
+
+<h1 id="changes-to-project-source">Changes to project source</h1>
+
+<p>Before running Gulp script, we must do some changes in source.</p>
+
+<p>We want to minify javascript and css files and combine those into just one file (one for js and one for css).</p>
+
+<p>This is done adding comments to index.html</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html"><span style="color:#75715e">&lt;!DOCTYPE html&gt;</span>
+
+&lt;<span style="color:#f92672">html</span> <span style="color:#a6e22e">lang</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;en&#34;</span>&gt;
+
+&lt;<span style="color:#f92672">head</span>&gt;
+  &lt;<span style="color:#f92672">meta</span> <span style="color:#a6e22e">charset</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;utf-8&#34;</span>&gt;
+  &lt;<span style="color:#f92672">title</span>&gt;AngularJS template example&lt;/<span style="color:#f92672">title</span>&gt;
+  &lt;<span style="color:#f92672">meta</span> <span style="color:#a6e22e">name</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;viewport&#34;</span> <span style="color:#a6e22e">content</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;width=device-width, initial-scale=1&#34;</span>&gt;
+  &lt;<span style="color:#f92672">link</span> <span style="color:#a6e22e">href</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;//fonts.googleapis.com/css?family=Raleway:400,300,600&#34;</span> <span style="color:#a6e22e">rel</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;stylesheet&#34;</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text/css&#34;</span>&gt;
+  <span style="color:#75715e">&lt;!-- build:css modules/css/release.css --&gt;</span>
+  &lt;<span style="color:#f92672">link</span> <span style="color:#a6e22e">rel</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;stylesheet&#34;</span> <span style="color:#a6e22e">href</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;css/normalize.css&#34;</span>&gt;
+  &lt;<span style="color:#f92672">link</span> <span style="color:#a6e22e">rel</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;stylesheet&#34;</span> <span style="color:#a6e22e">href</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;css/skeleton.css&#34;</span>&gt;
+  &lt;<span style="color:#f92672">link</span> <span style="color:#a6e22e">rel</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;stylesheet&#34;</span> <span style="color:#a6e22e">href</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;css/main.css&#34;</span>&gt;
+  <span style="color:#75715e">&lt;!-- endbuild --&gt;</span>
+  &lt;<span style="color:#f92672">link</span> <span style="color:#a6e22e">rel</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;icon&#34;</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;image/png&#34;</span> <span style="color:#a6e22e">href</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;images/favicon.png&#34;</span>&gt;
+&lt;/<span style="color:#f92672">head</span>&gt;
+
+&lt;<span style="color:#f92672">body</span>&gt;
+
+  &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">ng-app</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;App&#34;</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;container&#34;</span>&gt;
+    &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;row&#34;</span>&gt;
+      &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;one-half column&#34;</span> <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;margin-top: 25%&#34;</span>&gt;
+        &lt;<span style="color:#f92672">h2</span>&gt;AngularJS template example&lt;/<span style="color:#f92672">h2</span>&gt;
+        &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;nav&#34;</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;fourteen columns&#34;</span>&gt;
+          &lt;<span style="color:#f92672">ul</span>&gt;
+            &lt;<span style="color:#f92672">li</span>&gt;&lt;<span style="color:#f92672">a</span> <span style="color:#a6e22e">href</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/&#34;</span>&gt;Home&lt;/<span style="color:#f92672">a</span>&gt;&lt;/<span style="color:#f92672">li</span>&gt;
+            &lt;<span style="color:#f92672">li</span>&gt;&lt;<span style="color:#f92672">a</span> <span style="color:#a6e22e">href</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/#!page1&#34;</span>&gt;Page 1&lt;/<span style="color:#f92672">a</span>&gt;&lt;/<span style="color:#f92672">li</span>&gt;
+            &lt;<span style="color:#f92672">li</span>&gt;&lt;<span style="color:#f92672">a</span> <span style="color:#a6e22e">href</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/#!page2&#34;</span>&gt;Page 2&lt;/<span style="color:#f92672">a</span>&gt;&lt;/<span style="color:#f92672">li</span>&gt;
+          &lt;/<span style="color:#f92672">ul</span>&gt;
+        &lt;/<span style="color:#f92672">div</span>&gt;
+        &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">ng-controller</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;homeController&#34;</span>&gt;
+          &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">ng-view</span>&gt;&lt;/<span style="color:#f92672">div</span>&gt;
+        &lt;/<span style="color:#f92672">div</span>&gt;
+      &lt;/<span style="color:#f92672">div</span>&gt;
+    &lt;/<span style="color:#f92672">div</span>&gt;
+  &lt;/<span style="color:#f92672">div</span>&gt;
+
+  <span style="color:#75715e">&lt;!-- build:js modules/js/release.js --&gt;</span>
+  &lt;<span style="color:#f92672">script</span> <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;js/angular.min.js&#34;</span>&gt;&lt;/<span style="color:#f92672">script</span>&gt;
+  &lt;<span style="color:#f92672">script</span> <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;js/angular-route.min.js&#34;</span>&gt;&lt;/<span style="color:#f92672">script</span>&gt;
+  &lt;<span style="color:#f92672">script</span> <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;js/app.js&#34;</span>&gt;&lt;/<span style="color:#f92672">script</span>&gt;
+  <span style="color:#75715e">&lt;!-- endbuild --&gt;</span>
+
+&lt;/<span style="color:#f92672">body</span>&gt;
+
+&lt;/<span style="color:#f92672">html</span>&gt;</code></pre></div>
+
+<p>Here are important those line</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html"><span style="color:#75715e">&lt;!-- build:css modules/css/release.css --&gt;</span>
+
+
+<span style="color:#75715e">&lt;!-- endbuild --&gt;</span></code></pre></div>
+
+<p>and</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html"><span style="color:#75715e">&lt;!-- build:js modules/js/release.js --&gt;</span>
+
+
+<span style="color:#75715e">&lt;!-- endbuild --&gt;</span></code></pre></div>
+
+<p>Everything between those lines will be combined in just one file, release.css and release.js. Links would be fixed in index.html by Gulp.</p>
+
+<p>We must also add some code to AngularJS part, to intercept every request to our templates directory, where our html partials are stored, and to add query with time stamp at the end of url.</p>
+
+<p>I have added this to my app.js file:</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript">  <span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">service</span>(<span style="color:#e6db74">&#39;preventTemplateCache&#39;</span>, [<span style="color:#66d9ef">function</span>() {
+    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">service</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>;
+    <span style="color:#a6e22e">service</span>.<span style="color:#a6e22e">request</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">config</span>) {
+      <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">config</span>.<span style="color:#a6e22e">url</span>.<span style="color:#a6e22e">indexOf</span>(<span style="color:#e6db74">&#39;templates&#39;</span>) <span style="color:#f92672">!==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) {
+        <span style="color:#a6e22e">config</span>.<span style="color:#a6e22e">url</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">config</span>.<span style="color:#a6e22e">url</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;?t=___REPLACE_IN_GULP___&#39;</span>
+      }
+      <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">config</span>;
+    };
+  }]);
+
+  <span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">config</span>([<span style="color:#e6db74">&#39;$httpProvider&#39;</span>,<span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">$httpProvider</span>) {
+    <span style="color:#a6e22e">$httpProvider</span>.<span style="color:#a6e22e">interceptors</span>.<span style="color:#a6e22e">push</span>(<span style="color:#e6db74">&#39;preventTemplateCache&#39;</span>);
+  }]);
+</code></pre></div>
+
+<p>Place holder <code>___REPLACE_IN_GULP___</code> would be changed with time stamp in gulpfile.js</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">task</span>(<span style="color:#e6db74">&#39;minify&#39;</span>, <span style="color:#66d9ef">function</span>(){
+  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">src</span>(<span style="color:#e6db74">&#39;index.html&#39;</span>)
+          .<span style="color:#a6e22e">pipe</span>(<span style="color:#a6e22e">useref</span>())
+          .<span style="color:#a6e22e">pipe</span>(<span style="color:#a6e22e">replace</span>(<span style="color:#e6db74">&#39;___REPLACE_IN_GULP___&#39;</span>, <span style="color:#a6e22e">versionTimeStamp</span>))
+          .<span style="color:#a6e22e">pipe</span>(<span style="color:#a6e22e">gulpif</span>(<span style="color:#e6db74">&#39;*.js&#39;</span>, <span style="color:#a6e22e">uglify</span>()))
+          .<span style="color:#a6e22e">pipe</span>(<span style="color:#a6e22e">gulpif</span>(<span style="color:#e6db74">&#39;*.css&#39;</span>, <span style="color:#a6e22e">minifyCss</span>()))
+          .<span style="color:#a6e22e">pipe</span>(<span style="color:#a6e22e">cachebust</span>({
+            <span style="color:#a6e22e">type</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;timestamp&#39;</span>
+          }))
+          .<span style="color:#a6e22e">pipe</span>(<span style="color:#a6e22e">gulp</span>.<span style="color:#a6e22e">dest</span>(<span style="color:#e6db74">&#39;public&#39;</span>));
+});
+</code></pre></div>
+
+<h1 id="create-release-version-of-web-site">Create release version of web site</h1>
+
+<p>Now we can call gulp-cli command</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">gulp</code></pre></div>
+
+<p>and see log of executed commands</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">[</span><span style="color:#ae81ff">09</span>:15:59<span style="color:#f92672">]</span> Using gulpfile ~<span style="color:#ae81ff">\c</span>ode<span style="color:#ae81ff">\s</span>ource<span style="color:#ae81ff">\w</span>eb<span style="color:#ae81ff">\a</span>ngularjs-templates-example<span style="color:#ae81ff">\g</span>ulpfile.js
+<span style="color:#f92672">[</span><span style="color:#ae81ff">09</span>:15:59<span style="color:#f92672">]</span> Starting <span style="color:#e6db74">&#39;default&#39;</span>...
+<span style="color:#f92672">[</span><span style="color:#ae81ff">09</span>:15:59<span style="color:#f92672">]</span> Starting <span style="color:#e6db74">&#39;delete_all&#39;</span>...
+<span style="color:#f92672">[</span><span style="color:#ae81ff">09</span>:15:59<span style="color:#f92672">]</span> Finished <span style="color:#e6db74">&#39;delete_all&#39;</span> after <span style="color:#ae81ff">53</span> ms
+<span style="color:#f92672">[</span><span style="color:#ae81ff">09</span>:15:59<span style="color:#f92672">]</span> Starting <span style="color:#e6db74">&#39;minify&#39;</span>...
+<span style="color:#f92672">[</span><span style="color:#ae81ff">09</span>:16:00<span style="color:#f92672">]</span> Replaced: <span style="color:#e6db74">&#34;___REPLACE_IN_GULP___&#34;</span> to <span style="color:#e6db74">&#34;1556694959784&#34;</span> in a file: ~<span style="color:#ae81ff">\c</span>ode<span style="color:#ae81ff">\s</span>ource<span style="color:#ae81ff">\w</span>eb<span style="color:#ae81ff">\a</span>ngularjs-templates-example<span style="color:#ae81ff">\m</span>odules<span style="color:#ae81ff">\j</span>s<span style="color:#ae81ff">\r</span>elease.js
+<span style="color:#f92672">[</span><span style="color:#ae81ff">09</span>:16:04<span style="color:#f92672">]</span> Finished <span style="color:#e6db74">&#39;minify&#39;</span> after <span style="color:#ae81ff">4</span>.95 s
+<span style="color:#f92672">[</span><span style="color:#ae81ff">09</span>:16:04<span style="color:#f92672">]</span> Starting <span style="color:#e6db74">&#39;copy1&#39;</span>...
+<span style="color:#f92672">[</span><span style="color:#ae81ff">09</span>:16:04<span style="color:#f92672">]</span> Finished <span style="color:#e6db74">&#39;copy1&#39;</span> after <span style="color:#ae81ff">17</span> ms
+<span style="color:#f92672">[</span><span style="color:#ae81ff">09</span>:16:04<span style="color:#f92672">]</span> Starting <span style="color:#e6db74">&#39;copy2&#39;</span>...
+<span style="color:#f92672">[</span><span style="color:#ae81ff">09</span>:16:04<span style="color:#f92672">]</span> Finished <span style="color:#e6db74">&#39;copy2&#39;</span> after <span style="color:#ae81ff">7</span>.8 ms
+<span style="color:#f92672">[</span><span style="color:#ae81ff">09</span>:16:04<span style="color:#f92672">]</span> Finished <span style="color:#e6db74">&#39;default&#39;</span> after <span style="color:#ae81ff">5</span>.05 s</code></pre></div>
+
+<p>Take a look into generated source in public folder. You will see in index.html, that we have only one js and css file, with time stamp added as query parameter</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html"><span style="color:#75715e">&lt;!DOCTYPE html&gt;</span>
+
+&lt;<span style="color:#f92672">html</span> <span style="color:#a6e22e">lang</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;en&#34;</span>&gt;
+
+&lt;<span style="color:#f92672">head</span>&gt;
+  &lt;<span style="color:#f92672">meta</span> <span style="color:#a6e22e">charset</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;utf-8&#34;</span>&gt;
+  &lt;<span style="color:#f92672">title</span>&gt;AngularJS template example&lt;/<span style="color:#f92672">title</span>&gt;
+  &lt;<span style="color:#f92672">meta</span> <span style="color:#a6e22e">name</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;viewport&#34;</span> <span style="color:#a6e22e">content</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;width=device-width, initial-scale=1&#34;</span>&gt;
+  &lt;<span style="color:#f92672">link</span> <span style="color:#a6e22e">href</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;//fonts.googleapis.com/css?family=Raleway:400,300,600&#34;</span> <span style="color:#a6e22e">rel</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;stylesheet&#34;</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text/css&#34;</span>&gt;
+  &lt;<span style="color:#f92672">link</span> <span style="color:#a6e22e">rel</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;stylesheet&#34;</span> <span style="color:#a6e22e">href</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;modules/css/release.css?t=1556694960179&#34;</span>&gt;
+  &lt;<span style="color:#f92672">link</span> <span style="color:#a6e22e">rel</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;icon&#34;</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;image/png&#34;</span> <span style="color:#a6e22e">href</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;images/favicon.png&#34;</span>&gt;
+&lt;/<span style="color:#f92672">head</span>&gt;
+
+&lt;<span style="color:#f92672">body</span>&gt;
+
+  &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">ng-app</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;App&#34;</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;container&#34;</span>&gt;
+    &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;row&#34;</span>&gt;
+      &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;one-half column&#34;</span> <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;margin-top: 25%&#34;</span>&gt;
+        &lt;<span style="color:#f92672">h2</span>&gt;AngularJS template example&lt;/<span style="color:#f92672">h2</span>&gt;
+        &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;nav&#34;</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;fourteen columns&#34;</span>&gt;
+          &lt;<span style="color:#f92672">ul</span>&gt;
+            &lt;<span style="color:#f92672">li</span>&gt;&lt;<span style="color:#f92672">a</span> <span style="color:#a6e22e">href</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/&#34;</span>&gt;Home&lt;/<span style="color:#f92672">a</span>&gt;&lt;/<span style="color:#f92672">li</span>&gt;
+            &lt;<span style="color:#f92672">li</span>&gt;&lt;<span style="color:#f92672">a</span> <span style="color:#a6e22e">href</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/#!page1&#34;</span>&gt;Page 1&lt;/<span style="color:#f92672">a</span>&gt;&lt;/<span style="color:#f92672">li</span>&gt;
+            &lt;<span style="color:#f92672">li</span>&gt;&lt;<span style="color:#f92672">a</span> <span style="color:#a6e22e">href</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/#!page2&#34;</span>&gt;Page 2&lt;/<span style="color:#f92672">a</span>&gt;&lt;/<span style="color:#f92672">li</span>&gt;
+          &lt;/<span style="color:#f92672">ul</span>&gt;
+        &lt;/<span style="color:#f92672">div</span>&gt;
+        &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">ng-controller</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;homeController&#34;</span>&gt;
+          &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">ng-view</span>&gt;&lt;/<span style="color:#f92672">div</span>&gt;
+        &lt;/<span style="color:#f92672">div</span>&gt;
+      &lt;/<span style="color:#f92672">div</span>&gt;
+    &lt;/<span style="color:#f92672">div</span>&gt;
+  &lt;/<span style="color:#f92672">div</span>&gt;
+
+  &lt;<span style="color:#f92672">script</span> <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;modules/js/release.js?t=1556694960179&#34;</span>&gt;&lt;/<span style="color:#f92672">script</span>&gt;
+
+&lt;/<span style="color:#f92672">body</span>&gt;
+
+&lt;/<span style="color:#f92672">html</span>&gt;</code></pre></div>
+
+<p>and in release.js you can see that place holder _<strong>REPLACE_IN_GULP</strong>_ is also updated with time stamp.</p>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p>Using Gulp I can create release version of my AngularJS web site, where all js and css files are minified and combined into single files, and where Cache bust is included, to force web browser to load new version.</p>
+
+  </div>
+
+  
+
+  
+    </main>
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-138734051-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+    
+  </body>
+</html>

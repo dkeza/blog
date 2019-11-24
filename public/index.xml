@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Darko Kezic&#39;s Blog</title>
+    <link>http://kezic.local/</link>
+    <description>Recent content on Darko Kezic&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 24 Nov 2019 12:29:23 +0100</lastBuildDate>
+    
+	<atom:link href="http://kezic.local/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Contact me</title>
+      <link>http://kezic.local/contactme/</link>
+      <pubDate>Sun, 24 Nov 2019 12:29:23 +0100</pubDate>
+      
+      <guid>http://kezic.local/contactme/</guid>
+      <description>If You wish to contact me, please send me a message</description>
+    </item>
+    
+    <item>
+      <title>About me</title>
+      <link>http://kezic.local/about/</link>
+      <pubDate>Sat, 23 Nov 2019 19:47:23 +0100</pubDate>
+      
+      <guid>http://kezic.local/about/</guid>
+      <description>Darko Kežić Novi Sad, Serbia
+Software Engineer Developing new software solutions using right tools, maintaining existing applications, learning new technologies, tracking projects progress and meeting deadlines.
+Fluent in German, English and Serbian language.
+Coding · Web and Desktop apps · Database design · Project management · Team leading
+Experience
+2001 – Present Software Engineer · Citadel Hotelsoftware GmbH · Germany (remote work) Small sized company which is selling and supporting own software products in Germany and other EU countries.</description>
+    </item>
+    
+    <item>
+      <title>AngularJS - Minify resources and Cache Busting</title>
+      <link>http://kezic.local/posts/angularjs-minify-cache-busting/</link>
+      <pubDate>Tue, 30 Apr 2019 23:05:44 +0200</pubDate>
+      
+      <guid>http://kezic.local/posts/angularjs-minify-cache-busting/</guid>
+      <description>Single page aplication When dealing with Single page application (SPA), it is nessesary to think about minifying those js and css files, and combining those in single files, to speed up loading of app.
+Also there is another issue with caching. When You release new version, browser won&amp;rsquo;t load new files, until You go into developer tools, and disable caching. But this is not a solution for production app.</description>
+    </item>
+    
+    <item>
+      <title>How to send E-Mail from Go</title>
+      <link>http://kezic.local/posts/send-email-from-go/</link>
+      <pubDate>Sun, 21 Apr 2019 10:21:19 +0200</pubDate>
+      
+      <guid>http://kezic.local/posts/send-email-from-go/</guid>
+      <description>&lt;p&gt;I wanted to create small service in Go, which should asynchronously send E-Mails created on web site.&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
