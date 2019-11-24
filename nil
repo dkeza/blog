@@ -10,3 +10,10 @@
 [main 2019-11-24T11:53:49.040Z] update#setState idle
 [main 2019-11-24T12:53:48.828Z] update#setState checking for updates
 [main 2019-11-24T12:53:49.058Z] update#setState idle
+[main 2019-11-24T15:51:20.763Z] update#setState checking for updates
+[main 2019-11-24T15:51:20.995Z] [Error: net::ERR_NAME_NOT_RESOLVED]
+[main 2019-11-24T15:51:20.999Z] update#setState idle
+[main 2019-11-24T16:51:20.856Z] update#setState checking for updates
+[main 2019-11-24T16:51:21.132Z] update#setState idle
+[main 2019-11-24T17:51:20.878Z] update#setState checking for updates
+[main 2019-11-24T17:51:21.089Z] update#setState idle

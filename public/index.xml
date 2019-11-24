@@ -6,10 +6,24 @@
     <description>Recent content on Darko Kezic&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 24 Nov 2019 12:29:23 +0100</lastBuildDate>
+    <lastBuildDate>Sun, 24 Nov 2019 18:59:23 +0100</lastBuildDate>
     
 	<atom:link href="http://kezic.local/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Projects</title>
+      <link>http://kezic.local/projects/</link>
+      <pubDate>Sun, 24 Nov 2019 18:59:23 +0100</pubDate>
+      
+      <guid>http://kezic.local/projects/</guid>
+      <description>Here is list of my side projects
+GoExpenses This is expenses app, which I am using to track my expenses. Exchange rate between RSD and EUR currencies is automatically updated daily. User can create accounts, expenses and incomes.
+It is possible to use SQLite or PostgreSQL database.
+That can be set in goexpenses.ini file:
+[settings] databasetype=postgres For SQLite databasetype should be set to sqlite.
+In goexpenses.ini file is possible also to set other parameters, like mail server, openexchange id etc.</description>
+    </item>
     
     <item>
       <title>Contact me</title>

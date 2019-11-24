@@ -3,12 +3,17 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>http://kezic.local/contactme/</loc>
-    <lastmod>2019-11-24T12:29:23+01:00</lastmod>
+    <loc>http://kezic.local/</loc>
+    <lastmod>2019-11-24T18:59:23+01:00</lastmod>
   </url>
   
   <url>
-    <loc>http://kezic.local/</loc>
+    <loc>http://kezic.local/projects/</loc>
+    <lastmod>2019-11-24T18:59:23+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://kezic.local/contactme/</loc>
     <lastmod>2019-11-24T12:29:23+01:00</lastmod>
   </url>
   

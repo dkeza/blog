@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Posts &middot; Darko Kezic&#39;s Blog</title>
+  <title>Projects &middot; Darko Kezic&#39;s Blog</title>
 
   
   <link type="text/css" rel="stylesheet" href="http://kezic.local/css/print.css" media="print">
@@ -30,7 +30,7 @@
   <link rel="shortcut icon" href="/favicon.png">
 
   
-  <link href="http://kezic.local/posts/index.xml" rel="alternate" type="application/rss+xml" title="Darko Kezic&#39;s Blog" />
+  <link href="" rel="alternate" type="application/rss+xml" title="Darko Kezic&#39;s Blog" />
 
   
 </head>
@@ -84,13 +84,34 @@
   </div>
 </div>
     <main class="content container">
-    <ul class="posts">
-<li>
-    <span><a href="http://kezic.local/posts/angularjs-minify-cache-busting/">AngularJS - Minify resources and Cache Busting</a> <time class="pull-right post-list" datetime="2019-04-30T23:05:44&#43;0200">Tue, Apr 30, 2019</time></span>
-  </li><li>
-    <span><a href="http://kezic.local/posts/send-email-from-go/">How to send E-Mail from Go</a> <time class="pull-right post-list" datetime="2019-04-21T10:21:19&#43;0200">Sun, Apr 21, 2019</time></span>
-  </li>
-</ul>
+    <div class="post">
+    <h1>Projects</h1>
+    
+    
+
+<p>Here is list of my side projects</p>
+
+<h1 id="goexpenses">GoExpenses</h1>
+
+<p>This is expenses app, which I am using to track my expenses. Exchange rate between RSD and EUR currencies is automatically updated daily. User can create accounts, expenses and incomes.<br />
+It is possible to use SQLite or PostgreSQL database.</p>
+
+<p>That can be set in goexpenses.ini file:</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">[</span>settings<span style="color:#f92672">]</span>
+databasetype<span style="color:#f92672">=</span>postgres</code></pre></div>
+
+<p>For SQLite <em>databasetype</em> should be set to <em>sqlite</em>.<br />
+In goexpenses.ini file is possible also to set other parameters, like mail server, openexchange id etc.</p>
+
+<p><a href="https://goexpenses.kezic.net/">Live web site goexpenses.kezic.net</a><br />
+<a href="https://github.com/dkeza/goexpenses">Source on Github</a></p>
+
+  </div>
+
+  
+
+  
     </main>
 
     
